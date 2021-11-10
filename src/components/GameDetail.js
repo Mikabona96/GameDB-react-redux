@@ -4,9 +4,18 @@ import styled from 'styled-components'
 import Spinner from './Spinner'
 import {useNavigate} from 'react-router-dom'
 import { smallImage } from '../util'
+import {useLocation} from 'react-router'
+
+import playstation from '../img/playstation.svg'
+import steam from '../img/steam.svg'
+import xbox from '../img/xbox.svg'
+import nintendo from '../img/nintendo.svg'
+import apple from '../img/apple.svg'
+import gamepad from '../img/gamepad.svg'
 
 const GameDetail = () => {
 
+	const pathId = +useLocation().pathname.split('/')[2]
 	const navigate = useNavigate()
 
 	const exitDetailHandler = (e) => {
@@ -16,12 +25,31 @@ const GameDetail = () => {
 		}
 	}
 
+	const getPlatform = (platform) => {
+		switch (platform) {
+			case 'Playstation 4':
+				return playstation
+			case 'Xbox One':
+				return xbox
+			case 'PC':
+				return steam
+			case 'Nintendo Switch':
+				return nintendo
+			case 'iOS':
+				return apple
+			default:
+				return gamepad
+		}
+	}
+
+	console.log(typeof pathId, 'coco jambo')
+
 	const { game, screen, isLoading} = useSelector(state => state.detail)
 	
 	return (
 		<>	
 			<CardShadow className="shadow" onClick={exitDetailHandler}>
-				<Detail className="cardShadow-detail">
+				<Detail layoutId={pathId} className="cardShadow-detail">
 					{!isLoading ? (<>
 						<Stats>
 							<div className="rating">
@@ -32,7 +60,7 @@ const GameDetail = () => {
 								<h3>Platforms</h3>
 								<Platforms>
 									{game ? game.platforms.map(data => (
-										<h3 key={data.platform.id}>{data.platform.name}</h3>
+										<img src={getPlatform(data.platform.name)} alt="" key={data.platform.id}></img>
 									)) : null}
 								</Platforms>
 							</Info>
@@ -73,6 +101,7 @@ const CardShadow = styled(motion.div)`
 	&::-webkit-scrollbar-track {
 		background: white;
 	}
+	z-index: 50;
 `
 
 const Detail = styled(motion.div) `
@@ -81,9 +110,9 @@ const Detail = styled(motion.div) `
 	padding: 2rem 3rem;
 	background: white;
 	position: absolute;
-	left: 50%;
+	left: 10%;
+	/* transform: translateX(-50%); */
 	top: 10%;
-	transform: translateX(-50%);
 	color: black;
 	img {
 		width: 100%;

@@ -11,9 +11,11 @@ const Game = ({name, released, image, id}) => {
 	const loadDetailHandler = () => {
 		document.body.style.overflow = 'hidden'
 		dispatch(loadDetail(id))
+		console.log(typeof id)
 	}
+
 	return (
-		<StyledGame onClick={loadDetailHandler}>
+		<StyledGame layoutId={id} onClick={loadDetailHandler}>
 			<Link to={`/game/${id}`}>
 				<h3>{name}</h3>
 				<p>{released}</p>

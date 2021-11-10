@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadGames } from '../actions/gamesAction';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Game from '../components/Game';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
 
 const Home = () => {
+
+	const pathId = useLocation().pathname.split('/')[2]
 
  	const dispatch = useDispatch()
   	useEffect(() => {
@@ -18,25 +20,29 @@ const Home = () => {
 	const {popular, newGames, upcoming} = useSelector(state => state.games)
 	return (
 		<GameList>
-			<Outlet />
-			<h2>Upcoming Games</h2>
-			<Games>
-				{upcoming.map(game => (
-					<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
-				))}
-			</Games>
-			<h2>Popular Games</h2>
-			<Games>
-				{popular.map(game => (
-					<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
-				))}
-			</Games>
-			<h2>New Games</h2>
-			<Games>
-				{newGames.map(game => (
-					<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
-				))}
-			</Games>
+			<AnimateSharedLayout type="crossfade">
+				<AnimatePresence>
+					{pathId && <Outlet />}
+				</AnimatePresence>
+				<h2>Upcoming Games</h2>
+				<Games>
+					{upcoming.map(game => (
+						<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+					))}
+				</Games>
+				<h2>Popular Games</h2>
+				<Games>
+					{popular.map(game => (
+						<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+					))}
+				</Games>
+				<h2>New Games</h2>
+				<Games>
+					{newGames.map(game => (
+						<Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+					))}
+				</Games>
+			</AnimateSharedLayout>
 		</GameList>
 	)
 }

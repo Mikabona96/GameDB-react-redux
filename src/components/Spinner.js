@@ -2,7 +2,7 @@ import styled, {keyframes} from 'styled-components'
 
 const Spinner = () => {
 	return (
-		<Loadingo class="loadingio-spinner-rolling-f8gpsq9nbd5"><Ldio class="ldio-05kuucmqu8hx">
+		<Loadingo className="loadingio-spinner-rolling-f8gpsq9nbd5"><Ldio className="ldio-05kuucmqu8hx">
 			<div></div>
 			</Ldio></Loadingo>
 	)

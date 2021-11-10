@@ -9,7 +9,7 @@ function App() {
       <GlobalStyles />
       <Routes>
         <Route path='/' element={<Home />}>
-          <Route path={'/game/:id'} element={<GameDetail />} />
+          <Route path={'/game/:id'} element={<GameDetail style={{position: 'absolute', left: '0%'}} />} />
         </Route>
       </Routes>
     </div>
