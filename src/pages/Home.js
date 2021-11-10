@@ -4,8 +4,11 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Game from '../components/Game';
+import { Outlet } from 'react-router';
+
 
 const Home = () => {
+
  	const dispatch = useDispatch()
   	useEffect(() => {
     	dispatch(loadGames())
@@ -15,6 +18,7 @@ const Home = () => {
 	const {popular, newGames, upcoming} = useSelector(state => state.games)
 	return (
 		<GameList>
+			<Outlet />
 			<h2>Upcoming Games</h2>
 			<Games>
 				{upcoming.map(game => (
