@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Game from '../components/Game';
 import { Outlet, useLocation } from 'react-router';
+import SearchedGame from '../components/SearchedGame';
 
 
 const Home = () => {
@@ -17,13 +18,19 @@ const Home = () => {
   	}, [dispatch])
 
 	// Get that data back
-	const {popular, newGames, upcoming} = useSelector(state => state.games)
+	const {popular, newGames, upcoming, searched} = useSelector(state => state.games)
 	return (
 		<GameList>
 			<AnimateSharedLayout type="crossfade">
 				<AnimatePresence>
 					{pathId && <Outlet />}
 				</AnimatePresence>
+				{searched.length ? (<><h2>Searched Games:</h2>
+				<Games>
+					{searched.map(game => (
+						<SearchedGame name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+					))}
+				</Games></>) : null}
 				<h2>Upcoming Games</h2>
 				<Games>
 					{upcoming.map(game => (

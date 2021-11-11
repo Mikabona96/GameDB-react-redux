@@ -44,3 +44,8 @@ export const newGamesURL = () => `${base_url}${new_games}`
 export const gameDetailsURL = (game_id) => `${base_url}games/${game_id}?key=${apiKey}`
 export const gameScreenshotURL = (game_id) => `${base_url}games/${game_id}/screenshots?key=${apiKey}`
 
+// Searched Game
+
+export const searchGameUrl = (game_name) => `${base_url}games?search=${game_name}&key=${apiKey}&page_size=9`
+
+                                         //  https://api.rawg.io/api/games?search=forza&page_size=9&key=d6896e8bc8e34e6c8b2dd3e1d783cade

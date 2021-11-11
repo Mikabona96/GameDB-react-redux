@@ -7,11 +7,17 @@ import { smallImage } from '../util'
 import {useLocation} from 'react-router'
 
 import playstation from '../img/playstation.svg'
+import ps51 from '../img/ps51.svg'
 import steam from '../img/steam.svg'
 import xbox from '../img/xbox.svg'
+import xboxsx from '../img/xboxsx.svg'
 import nintendo from '../img/nintendo.svg'
 import apple from '../img/apple.svg'
+import android from '../img/android.svg'
 import gamepad from '../img/gamepad.svg'
+import starEmpty from '../img/star-empty.svg'
+import starFull from '../img/star-full.svg'
+import starHalf from '../img/star-half.svg'
 
 const GameDetail = () => {
 
@@ -25,24 +31,52 @@ const GameDetail = () => {
 		}
 	}
 
+	const getStars = () => {
+		const stars = [];
+		const rating = Math.floor(game.rating);
+		const round = Math.round(game.rating);
+		const fixed = game.rating;
+		for (let i = 1; i <= 5; i++) {
+			if (i <= rating) {
+				stars.push(<img key={i} src={starFull} alt=""></img>)
+			}
+			else if (i === round && fixed < round) {
+				stars.push(<img key={i} src={starHalf} alt=""></img>)
+			}
+			 else {
+				stars.push(<img key={i} src={starEmpty} alt=""></img>)
+			}
+		}
+		return stars
+	}
+
 	const getPlatform = (platform) => {
+
 		switch (platform) {
-			case 'Playstation 4':
+			case 'PlayStation 4':
 				return playstation
+			case 'PlayStation 5':
+				return ps51
 			case 'Xbox One':
 				return xbox
+			case 'Xbox Series S/X':
+				return xboxsx
 			case 'PC':
 				return steam
 			case 'Nintendo Switch':
 				return nintendo
 			case 'iOS':
 				return apple
+			case 'Android':
+				return android
+			case null:
+				return
 			default:
 				return gamepad
 		}
+
 	}
 
-	console.log(typeof pathId, 'coco jambo')
 
 	const { game, screen, isLoading} = useSelector(state => state.detail)
 	
@@ -55,6 +89,7 @@ const GameDetail = () => {
 							<div className="rating">
 								<h3>{game ? game.name : null}</h3>
 								<p>Rating: {game ? game.rating : null}</p>
+								{getStars()}
 							</div>
 							<Info>
 								<h3>Platforms</h3>
@@ -123,6 +158,11 @@ const Stats = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	img {
+		width: 2rem;
+		height: 2rem;
+		display: inline;
+	}
 `
 
 const Info = styled(motion.div)`

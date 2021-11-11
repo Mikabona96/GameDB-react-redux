@@ -3,9 +3,8 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {loadDetail} from '../actions/detailAction'
-import {smallImage} from '../util'
 
-const Game = ({name, released, image, id}) => {
+const SearchedGame = ({name, released, image, id}) => {
 
 	const dispatch = useDispatch()
 	const loadDetailHandler = () => {
@@ -18,7 +17,7 @@ const Game = ({name, released, image, id}) => {
 			<Link to={`/game/${id}`}>
 				<h3>{name}</h3>
 				<p>{released}</p>
-				<img src={smallImage(image, 600)} alt={name} />
+				<img src={image} alt={name} />
 			</Link>
 		</StyledGame>
 	)
@@ -39,4 +38,4 @@ const StyledGame = styled(motion.div)`
 	}
 `
 
-export default Game
+export default SearchedGame
