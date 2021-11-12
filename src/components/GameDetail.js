@@ -18,6 +18,8 @@ import gamepad from '../img/gamepad.svg'
 import starEmpty from '../img/star-empty.svg'
 import starFull from '../img/star-full.svg'
 import starHalf from '../img/star-half.svg'
+import SliderComp from './SliderComp'
+
 
 const GameDetail = () => {
 
@@ -107,9 +109,10 @@ const GameDetail = () => {
 							<p>{game ? game.description_raw : null}</p>
 						</Description>
 						<div className="gallery">
-							{screen ?screen.results.map(screen => (
+							{/* {screen ? screen.results.map(screen => (
 								<img src={smallImage(screen.image, 1280)} key={screen.id} alt="" />
-							)) : null}
+							)) : null} */}
+							<SliderComp screen={screen.results}/>
 						</div>
 					</>) : <Spinner />}
 				</Detail>
