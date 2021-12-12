@@ -27,7 +27,8 @@ const currentDate = `${currentYear}-${currentMonth}-${currentDay}`
 const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`
 const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`
 
-const apiKey = `${process.env.REACT_APP_API_KEY}`;
+const apiKey = `d6896e8bc8e34e6c8b2dd3e1d783cade`;
+// const apiKey = `${process.env.REACT_APP_API_KEY}`;
 
 // Popular Games
 
